@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="contaienr mt-4">
+  <nav
+    style="
+      --bs-breadcrumb-divider: url(
+        &#34;data:image/svg + xml,
+        %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+      );
+    "
+    aria-label="breadcrumb"
+  >
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/{{type}}">{{type|title}}s</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">Add {{type|title}}</li>
+    </ol>
+  </nav>
+
+  <div class="card">
+    <div class="card-body">
+      <form action="/add-{{type}}" method="post">
+        {% include 'partials/_messages.html' %}
+        {% csrf_token %}
+
+        <input type="hidden" name="type" value="Expense">
+
+        <div class="form-group">
+          <label for="">Amount</label>
+          <input required type="number" class="form-control form-control-sm" name="amount" />
+        </div>
+        <div class="form-group">
+          <label for="">Description</label>
+          <input type="text" class="form-control form-control-sm" name="description" />
+        </div>
+        <div class="form-group">
+          <label for="">Category</label>
+          <select name="category" class="form-control">
+            {% for category in categories %}
+            <option name="category">{{category.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="">Date of Transaction</label>
+          <input type="date" placeholder="YYYY-MM-DD" class="form-control col-2" name="expense-date" />
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

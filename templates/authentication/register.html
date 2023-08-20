@@ -1,0 +1,73 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+  <div class="row col-md-4"></div>
+  <div class="row col-md-4">
+    <div class="card mt-5">
+      <div class="card-body">
+          <div class="card-title py-3">
+            <h4>Register now for a free account</h4>
+            </div>
+        <form action="{% url 'register' %}" method="post">
+          {% include 'partials/_messages.html' %}
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="username"
+              name="username"
+              placeholder="username"
+              class="form-control form-control-sm"
+              id="usernameField"
+
+              value="{{fieldValues.username}}"
+            />
+          </div>
+          <div class="invalid-feedback invalid-feedback-username" style="display: none;">
+
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              class="form-control form-control-sm"
+              id="emailField"
+
+              value="{{fieldValues.email}}"
+            />
+          </div>
+          <div class="invalid-feedback invalid-feedback-email" style="display: none;">
+
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              class="form-control form-control-sm"
+              id="passwordField"
+            />
+            <small class="float-right py-3 showPasswordToggle">SHOW</small>
+          </div>
+
+          <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn" />
+        </form>
+      </div>
+    
+    <div class="contianer mb-2">
+      <span class='my-4'>Do you have an account? <a href="{% url 'login' %}">Login</a></span>
+    </div>
+    
+    </div>
+    </div>
+  </div>
+  <div class="row col-md-4"></div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+
+{% endblock content %}

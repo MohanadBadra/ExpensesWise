@@ -1,0 +1,131 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav
+        style="
+          --bs-breadcrumb-divider: url(
+            &#34;data:image/svg + xml,
+            %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+          );
+        "
+        aria-label="breadcrumb"
+      >
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'transactions' %}">Transactions</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            My {{type|title}}s
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-2">
+      <a href="{% if type == 'transaction' %}
+      {% url 'add-expense' type='expense' %}
+    {% else %}
+      {% url 'add-expense' type=type %}
+    {% endif %}" class="btn btn-primary"
+        >Add {{type|title}}</a
+      >
+    </div>
+  </div>
+  <div class="contaienr">
+    {% include 'partials/_messages.html' %} {% if expenses %}
+
+    <div class="row">
+      <div class="col-md-8"></div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <input
+            type="text"
+            id="searchField"
+            class="form-control"
+            placeholder="Search"
+          />
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-stripped table-hover" style="display: table">
+      <thead>
+        <tr>
+          <th>Amount ({{currency}})</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Date</th>
+
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="table-app">
+        {% for expense in expenses %}
+        <tr>
+          <td>{{expense.amount}}</td>
+          <td>{{expense.category}}</td>
+          <td>{{expense.description}}</td>
+          <td>{{expense.date}}</td>
+
+          <td>
+            <a
+              href="{% url 'edit-expense' expense.id %}"
+              class="btn btn-secondary btn-sm"
+              >Edit</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+      <tbody id="table-output" style="display: none">
+        <tr>
+          <td>{{expense.amount}}</td>
+          <td>{{expense.category}}</td>
+          <td>{{expense.description}}</td>
+          <td>{{expense.date}}</td>
+
+          <td>
+            <a href=" " class="btn btn-secondary btn-sm">Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container">
+      <div class="">
+        Showing Page {{expenses.number}} of {{expenses.paginator.num_pages}}
+      </div>
+
+      <ul class="pagination justify-content-end flaot-right mr-auto">
+        {% if expenses.has_previous %}
+        <li class="page-item active">
+          <a href="?page={{expenses.previous_page_number}}" class="page-link"
+            >Previous</a
+          >
+        </li>
+        {% endif %} {% for page in pages_range %}
+        <li class="page-item">
+          <a href="?page={{page}}" class="page-link">{{page}}</a>
+        </li>
+        {% endfor %} {% if expenses.has_next %}
+        <li class="page-item active">
+          <a href="?page={{expenses.next_page_number}}" class="page-link"
+            >Next</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    {% endif %}
+  </div>
+  <script>
+    var transaction_type = "{{ type }}"; // Replace with your actual variable
+  </script>
+
+  <script src="{% static 'js/searchExpenses.js' %}"></script>
+</div>
+
+{% endblock %}

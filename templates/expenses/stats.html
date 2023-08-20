@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10">
+      <nav
+        style="
+          --bs-breadcrumb-divider: url(
+            &#34;data:image/svg + xml,
+            %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+          );
+        "
+        aria-label="breadcrumb"
+      >
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'transactions' %}">Summaries</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {{type|title}}s
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-2">
+      <a href="{% url 'transactions' %}" class="btn btn-primary">Back</a>
+    </div>
+  </div>
+  <div class="contaienr">
+    {% include 'partials/_messages.html' %}
+
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+
+  </div>
+</div>
+
+<script>
+  var transaction_type = "{{ type|title }}"; // Replace with your actual variable
+</script>
+
+<script src="{% static 'js/stats.js' %}"></script>
+{% endblock %}
