@@ -25,10 +25,12 @@ from django.contrib import messages
 SECRET_KEY = 'django-insecure-of=a_=xqbbpfq%+!+d1nsg=-sv4rm%qpt_z^4z!5g0je-^w)b='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+
+CSRF_TRUSTED_ORIGINS = ['https://expeseswise.up.railway.app', 'https://expenseswise.mohanad-badra.online']
 
 # Application definition
 
@@ -141,6 +143,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 
 
 AUTHENTICATION_BACKENDS = [
