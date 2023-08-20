@@ -30,7 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 
-CSRF_TRUSTED_ORIGINS = ['https://expeseswise.up.railway.app', 'https://expenseswise.mohanad-badra.online']
+CSRF_TRUSTED_ORIGINS = ['https://expenseswise.up.railway.app', 'https://expenseswise.mohanad-badra.online']
 
 # Application definition
 
