@@ -1,5 +1,12 @@
 By| Mohanad Badra - BackEnd Developer
+
 Using| Python - Django - Bootstrap - Char.JS
+
+Advanced Authentication & Login system [Register, Verify, Login, Reset Password (Forgot)]
+
+Manage your Expenses and Income an Visualing it with the stats function (summary)
+
+CRUD Transcations
 
 https://expenseswise.mohanad-badra.online
 
